@@ -1,0 +1,35 @@
+@import './theme/variables.less';
+
+.header {
+    background-color: @user-header-color;
+    & .link {
+        color: #000;
+        & a {
+            color: #000;
+        }
+    }
+    height: auto;
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,.05);
+
+    & .logo {
+      height: 50px;
+    }
+
+}
+.navBar {
+    line-height: 64px;
+    background-color: @user-header-color;
+}
+.contentWrapper {
+    padding: 0 24px 24px;
+
+}
+.content {
+	padding: 24px;
+  margin: 0px;
+  margin-top: 10px;
+	min-height: 280px;
+}
+label {
+    font-weight: bold;
+}
