@@ -3,22 +3,30 @@ import { Row, Col, Card, Icon, Spin, Button, Rate } from 'antd';
 import { Link } from 'react-router-dom';
 import { getRequest } from '../../services/ApiService';
 import AddToCart from '../../components/AddToCart';
-export default function Home() {
-    const [loading, setloading] = useState(true);
-    const [list, setlist] = useState([]);
+import { useQuery } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost';
 
-    useEffect(() => {
-        getRequest('/products').then(res => {
-            setlist(res);
-            setloading(false);
-        });
-       
-    }, []);
+
+const GET_PRODUCTS = gql`{
+    products{
+      _id
+      title
+      averageRating
+      price
+      image
+      isWhishlisted
+      cartId
+    }
+  }`;
+
+export default function Home() {
+    const { loading, data } = useQuery(GET_PRODUCTS);
+    console.log('my gql data', data);
 
     return loading ? <Spin /> : (
         <div>
             <Row>
-                { list.map(r => 
+                { data.products.map(r => 
                    (
                        <Col span={4} style={{marginBottom: "10px"}}>
                          <Card

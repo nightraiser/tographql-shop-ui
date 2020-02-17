@@ -2,11 +2,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Checkist
 
-[] Clone both repos
-[] install dependencies
-[] Run through exisiting implementation
-[]  Implement queries
-[] Use QUeries on UI
-[] Implement mutations
-[] Use implementations on UI
+- [ ] Clone both repos
+- [ ] install dependencies
+- [ ] Run through exisiting implementation
+- [ ] Implement queries
+- [ ] Use QUeries on UI
+- [ ] Implement mutations
+- [ ] Use implementations on UI
 
+Install Packages 
+
+`npm i --save graphql @apollo/react-hooks apollo-boost apollo-cache-inmemory`

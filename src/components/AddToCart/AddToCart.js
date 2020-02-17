@@ -1,13 +1,26 @@
 import React, { useState } from 'react'
 import { Button } from 'antd';
+import { useMutation } from '@apollo/react-hooks'
 import { postRequest } from '../../services/ApiService';
+import { gql } from 'apollo-boost';
+
+const ADD_TO_CART = gql`
+    mutation AddToCart($id: String!){
+        mycart(productId: $id) {
+        _id
+    }
+}
+`
 export default function AddToCart({ productId, isWhishlisted, cartId }) {
+    const [mycart] = useMutation(ADD_TO_CART);
     const [loading, setloading] = useState(false);
     const [type, setType] = useState(isWhishlisted ? 'remove' : 'add');
     const [cId, setCId] = useState(cartId);
     const handleAddToCart = async () => {
         setloading(true);
-        const res = await postRequest('/mycart', { item: productId});
+        const res = await mycart({
+            variables: { id: productId}
+        })
         setType("remove");
         setCId(res._id);
         setloading(false);

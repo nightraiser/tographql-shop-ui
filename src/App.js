@@ -1,14 +1,28 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, useHistory, Link } from "react-router-dom";
+import { ApolloProvider } from '@apollo/react-hooks';
+
 import { Layout, Affix, Menu , Row, Col, Icon, Dropdown} from 'antd';
 import Routes from './routes';
 import './style.less';
 import HomeSearch from './components/HomeSearch';
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
+//import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 const { Header, Content } = Layout;
+
+ const cache = new InMemoryCache();
+ const link = new HttpLink({
+	 uri:'http://localhost:4200/graphql'
+ })
+const client = new ApolloClient({
+	cache,
+	link
+})
 
 function App() {
 
   return (
+	 <ApolloProvider client={client}>
       <Router basename={process.env.REACT_APP_BASENAME || ""}>
 		  <Layout>
 			<Affix offsetTop={0}>
@@ -52,6 +66,7 @@ function App() {
 			</Layout>
 			</Layout>
   	</Router>
+	  </ApolloProvider>
 			
   );
 }
